@@ -14,10 +14,8 @@ function setup() {
   dog.addImage(dogImg);
   dog.scale=0.15;
 
-  var foodStock = database.ref("food") 
- foodStock.on("value",function(data){
- foodStock = data.val()
- })
+  foodStock = database.ref("food") 
+ foodStock.on("value",readStock)
 
 }
 
@@ -26,7 +24,7 @@ function draw() {
 background(46,139,87)
 
 if(keyWentDown(UP_ARROW)){
-  writeStock(foodStock);
+  writeStock(foodS);
   dog.addImage(dogHappy)
 }
 
@@ -39,7 +37,10 @@ text("Food remaining : "+foodS,170,200);
   drawSprites();
 }
 
-
+//Function to read values from DB
+function readStock(data){
+  foodS=data.val();
+}
 
 //Function to write values in DB
 function writeStock(x){
