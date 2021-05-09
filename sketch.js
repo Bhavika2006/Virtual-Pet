@@ -1,6 +1,5 @@
-var  dog, happyDog, database, foodS, foodStock,dogImg
+var  dog, happyDog, database, foodS = 0, foodStock,dogImg
 var database;
-
 function preload()
 {
 dogImg = loadImage("images/Dog.png")
@@ -8,7 +7,6 @@ dogHappy = loadImage("images/happydog.png")
 }
 
 function setup() {
-  var food = 0
   createCanvas(500, 500);
   database = firebase.database();
  
@@ -16,10 +14,8 @@ function setup() {
   dog.addImage(dogImg);
   dog.scale=0.15;
 
-  foodStock = database.ref("food") 
- foodStock.on("value",function(data){
-   Food = data.val();
- })
+  foodStock = database.ref("Food") 
+ foodStock.on("value",readStock)
 
 }
 
